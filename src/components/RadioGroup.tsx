@@ -24,7 +24,6 @@ export default function RadioGroup<TValue extends string>({
       <div className="flex gap-3">
         {options.map((option) => {
           const isSelected = option.value === value;
-
           return (
             <Radio<TValue>
               key={option.value}

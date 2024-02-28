@@ -13,10 +13,10 @@ export default function Radio<TValue extends string>({
   return (
     <div className="flex items-center mb-4">
       <input
-        id="default-radio-1"
+        id={`default-radio-${value}`}
         type="radio"
         value={value}
-        name="default-radio"
+        name={`default-radio-${value}`}
         checked={checked}
         onChange={(event) => {
           onChange(event.currentTarget.value as TValue);
@@ -24,7 +24,7 @@ export default function Radio<TValue extends string>({
         className="w-4 h-4 bg-gray-100 border-blue-950 focus:ring-blue-950 focus:ring-2"
       />
       <label
-        htmlFor="default-radio-1"
+        htmlFor={`default-radio-${value}`}
         className="ms-2 text-sm font-light text-gray-400"
       >
         {label}
