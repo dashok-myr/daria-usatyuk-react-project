@@ -1,0 +1,34 @@
+interface IRadioProps<TValue> {
+  value: TValue;
+  label: string;
+  checked: boolean;
+  onChange: (value: TValue) => void;
+}
+export default function Radio<TValue extends string>({
+  label,
+  value,
+  checked,
+  onChange,
+}: IRadioProps<TValue>) {
+  return (
+    <div className="flex items-center mb-4">
+      <input
+        id="default-radio-1"
+        type="radio"
+        value={value}
+        name="default-radio"
+        checked={checked}
+        onChange={(event) => {
+          onChange(event.currentTarget.value as TValue);
+        }}
+        className="w-4 h-4 bg-gray-100 border-blue-950 focus:ring-blue-950 focus:ring-2"
+      />
+      <label
+        htmlFor="default-radio-1"
+        className="ms-2 text-sm font-light text-gray-400"
+      >
+        {label}
+      </label>
+    </div>
+  );
+}
