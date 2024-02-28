@@ -28,16 +28,20 @@ const ButtonVariants = cva(
 
 type ButtonVariants = VariantProps<typeof ButtonVariants>;
 
-type IButtonProps = PropsWithChildren<ButtonVariants>;
+type IButtonProps = PropsWithChildren<ButtonVariants> & { onClick: () => void };
 
 export default function Button({
   intent,
   size,
   fullWidth,
   children,
+  onClick,
 }: IButtonProps) {
   return (
-    <button className={ButtonVariants({ intent, size, fullWidth })}>
+    <button
+      onClick={onClick}
+      className={ButtonVariants({ intent, size, fullWidth })}
+    >
       {children}
     </button>
   );

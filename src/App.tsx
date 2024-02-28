@@ -2,7 +2,7 @@ import CloseButton from "./CloseButton.tsx";
 import RadioGroup from "./components/RadioGroup.tsx";
 import Dropdown from "./Dropdown.tsx";
 import Button from "./components/Button.tsx";
-import DropAndDrag from "./DropAndDrag.tsx";
+import DragAndDrop from "./DragAndDrop.tsx";
 import clockIcon from "../src/assets/clock-icon.jpeg";
 import Toggle from "./Toggle.tsx";
 import { useState } from "react";
@@ -41,7 +41,7 @@ export default function App() {
               onSelectOption={() => {}}
             />
             <div className="bg-gray-200 h-0.5 mt-5 mb-3 w-80" />
-            <DropAndDrag />
+            <DragAndDrop />
             <div className="bg-gray-200 h-0.5 mt-3 mb-3 w-80" />
             <div className="flex flex-col">
               <p className="text-navy font-semibold">Location Checking:</p>
@@ -87,8 +87,10 @@ export default function App() {
             Data in the import file is correct. Please press Continue to import.
           </p>
           <div className="flex flex-row gap-5 w-full">
-            <Button fullWidth>Continue Import</Button>
-            <Button intent="secondary" fullWidth>
+            <Button onClick={() => {}} fullWidth>
+              Continue Import
+            </Button>
+            <Button onClick={() => {}} intent="secondary" fullWidth>
               Cancel
             </Button>
           </div>
