@@ -1,10 +1,10 @@
-import arrowDown from "../src/assets/icon-arrow-down.svg";
+import arrowDown from "../assets/icon-arrow-down.svg";
 import { useState } from "react";
 
 interface IDropdownProps {
   value: string;
   options: string[];
-  onSelectOption: (option: string) => void;
+  onSelectOption: (option: string, index?: number) => void;
 }
 
 export default function Dropdown({
@@ -26,12 +26,12 @@ export default function Dropdown({
         </button>
         {isOpenDropdown && (
           <div className="divide-y absolute right-0 z-10 mt-2 w-full bg-white origin-top-right rounded-md shadow-lg ring-1 ring-gray-400 ring-opacity-5 focus:outline-none">
-            {options.map((option) => {
+            {options.map((option, index) => {
               return (
                 <div className="p-0.5">
                   <button
                     onClick={() => {
-                      onSelectOption(option);
+                      onSelectOption(option, index);
                       setIsOpenDropdown(false);
                     }}
                     className="font-semibold text-gray-700 px-4 py-2 text-sm"

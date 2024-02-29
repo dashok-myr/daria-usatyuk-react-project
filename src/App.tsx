@@ -1,18 +1,14 @@
 import CloseButton from "./CloseButton.tsx";
 import RadioGroup from "./components/RadioGroup.tsx";
-import Dropdown from "./Dropdown.tsx";
+import Dropdown from "./components/Dropdown.tsx";
 import Button from "./components/Button.tsx";
 import DragAndDrop from "./DragAndDrop.tsx";
 import clockIcon from "../src/assets/clock-icon.jpeg";
 import Toggle from "./Toggle.tsx";
 import { useState } from "react";
-import ClientOptions from "./ClientOptions.tsx";
+import ClientForm from "./ClientForm.tsx";
 
-const dropdownOptions = [
-  "Lorem ipsum dolor",
-  "dolore eu fugiat",
-  "sint occaecat",
-];
+const IMPORT_NAMES = ["Lorem ipsum dolor", "dolore eu fugiat", "sint occaecat"];
 
 const SOCIAL_DISTANCING = [
   { value: "yes", label: "Yes" },
@@ -24,6 +20,7 @@ type ISocialDistancingValue = (typeof SOCIAL_DISTANCING)[number]["value"];
 export default function App() {
   const [socialDistancing, setSocialDistancing] =
     useState<ISocialDistancingValue>("yes");
+  const [selectedImportName, setSelectedImportName] = useState("");
 
   return (
     <div className="h-auto bg-gray-50">
@@ -36,9 +33,15 @@ export default function App() {
         <div className="lg:flex gap-16 w-full lg:w-4/5">
           <div className="flex flex-col w-full lg:w-3/5">
             <Dropdown
-              value="Select Import Name:"
-              options={dropdownOptions}
-              onSelectOption={() => {}}
+              value={
+                selectedImportName === ""
+                  ? "Select Import Name:"
+                  : selectedImportName
+              }
+              options={IMPORT_NAMES}
+              onSelectOption={(option) => {
+                setSelectedImportName(option);
+              }}
             />
             <div className="bg-gray-200 h-0.5 mt-5 mb-3 w-80" />
             <DragAndDrop />
@@ -89,9 +92,7 @@ export default function App() {
               </div>
               <div className="bg-gray-200 h-0.5 my-2 w-80" />
             </div>
-            <div>
-              <ClientOptions />
-            </div>
+            <ClientForm />
           </div>
         </div>
 
