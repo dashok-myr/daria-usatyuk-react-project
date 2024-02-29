@@ -30,7 +30,7 @@ export default function DocumentUpload() {
           </div>
 
           <div className="flex flex-col w-2/5">
-            <div>
+            <div className="mt-5 lg:mt-0">
               <SplitScheduleRadioGroup />
               <div className="bg-gray-200 h-0.5 my-2 w-80" />
               <ElapsedDataCheckingStatus />

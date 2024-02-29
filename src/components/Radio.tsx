@@ -21,7 +21,7 @@ export default function Radio<TValue extends string>({
         onChange={(event) => {
           onChange(event.currentTarget.value as TValue);
         }}
-        className="w-4 h-4 bg-gray-100 border-blue-950 focus:ring-blue-950 focus:ring-2"
+        className="w-4 h-4 bg-gray-100"
       />
       <label
         htmlFor={`default-radio-${value}`}

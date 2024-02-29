@@ -1,7 +1,9 @@
-import { useState } from "react";
+interface IToggleProps {
+  isToggleOn: boolean;
+  setIsToggleOn: (isToggleOn: boolean) => void;
+}
 
-export default function Toggle() {
-  const [isToggleOn, setIsToggleOn] = useState(true);
+export default function Toggle({ isToggleOn, setIsToggleOn }: IToggleProps) {
   return (
     <label className="inline-flex items-center cursor-pointer">
       <input

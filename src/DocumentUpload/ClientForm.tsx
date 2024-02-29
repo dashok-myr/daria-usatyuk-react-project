@@ -1,46 +1,31 @@
 import RadioGroup from "../components/RadioGroup.tsx";
-import { useState } from "react";
 import DropdownWithLabel from "../components/DropdownWithLabel.tsx";
+import {
+  CLIENT_OPTIONS,
+  CLIENT_RADIO_OPTIONS,
+  IClientOptionValue,
+  useDocumentUploadContext,
+} from "../DocumentUploadProvider.tsx";
 
-const DROPDOWN_OPTIONS = [
-  "Lorem ipsum dolor",
-  "dolore eu fugiat",
-  "sint occaecat",
-];
-
-const CLIENT_OPTIONS = [
-  { name: "Testing Center 1", options: DROPDOWN_OPTIONS },
-  { name: "Testing Center 2", options: DROPDOWN_OPTIONS },
-  { name: "Testing Center 3", options: DROPDOWN_OPTIONS },
-  { name: "Testing Center 4", options: DROPDOWN_OPTIONS },
-];
-
-const CLIENT_RADIO_OPTIONS = [
-  { value: "single", label: "Single" },
-  { value: "multiple", label: "Multiple" },
-] as const;
-
-type IClientOptionValue = (typeof CLIENT_RADIO_OPTIONS)[number]["value"];
+const DROPDOWN_PLACEHOLDER = "Select Client";
 
 function ClientSingleForm({ option }: { option: (typeof CLIENT_OPTIONS)[0] }) {
-  const [selectedClientName, setSelectedClientName] = useState("");
+  const { formData, setClientSingleOption } = useDocumentUploadContext();
 
   return (
     <DropdownWithLabel
-      value={selectedClientName === "" ? "Select Client" : selectedClientName}
+      value={formData.clientSingleOption || DROPDOWN_PLACEHOLDER}
       label={option.name}
       options={option.options}
       onSelectOption={(selectedOption) => {
-        setSelectedClientName(selectedOption);
+        setClientSingleOption(selectedOption);
       }}
     />
   );
 }
 
 function ClientMultipleForm({ options }: { options: typeof CLIENT_OPTIONS }) {
-  const initialState = Array(options.length).fill("");
-  const [selectedClientNames, setSelectedClientNames] =
-    useState<string[]>(initialState);
+  const { formData, setClientMultipleOptions } = useDocumentUploadContext();
 
   return (
     <div className="flex flex-col gap-3">
@@ -48,18 +33,13 @@ function ClientMultipleForm({ options }: { options: typeof CLIENT_OPTIONS }) {
         return (
           <DropdownWithLabel
             value={
-              selectedClientNames[index] === ""
-                ? "Select client"
-                : selectedClientNames[index]
+              formData.clientMultipleOptions[index].option ||
+              DROPDOWN_PLACEHOLDER
             }
             label={option.name}
             options={option.options}
             onSelectOption={(selectedOption) => {
-              setSelectedClientNames((prevState) => {
-                const newArray = [...prevState];
-                newArray[index] = selectedOption;
-                return newArray;
-              });
+              setClientMultipleOptions(option.name, selectedOption);
             }}
           />
         );
@@ -69,23 +49,22 @@ function ClientMultipleForm({ options }: { options: typeof CLIENT_OPTIONS }) {
 }
 
 export default function ClientForm() {
-  const [clientRadioValue, setClientRadioValue] =
-    useState<IClientOptionValue>("multiple");
+  const { formData, setClientRadioValue } = useDocumentUploadContext();
 
   return (
     <>
       <RadioGroup<IClientOptionValue>
         title="Client:"
-        value={clientRadioValue}
+        value={formData.clientRadioValue}
         options={CLIENT_RADIO_OPTIONS}
         onChange={(value) => {
           setClientRadioValue(value);
         }}
       />
-      {clientRadioValue === "multiple" && (
+      {formData.clientRadioValue === "multiple" && (
         <ClientMultipleForm options={CLIENT_OPTIONS} />
       )}
-      {clientRadioValue === "single" && (
+      {formData.clientRadioValue === "single" && (
         <ClientSingleForm option={CLIENT_OPTIONS[0]} />
       )}
     </>

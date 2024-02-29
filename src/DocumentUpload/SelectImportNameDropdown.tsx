@@ -1,19 +1,20 @@
-import { useState } from "react";
 import Dropdown from "../components/Dropdown.tsx";
-
-const IMPORT_NAMES = ["Lorem ipsum dolor", "dolore eu fugiat", "sint occaecat"];
+import {
+  DROPDOWN_OPTIONS,
+  useDocumentUploadContext,
+} from "../DocumentUploadProvider.tsx";
 
 export default function SelectImportNameDropdown() {
-  const [selectedImportName, setSelectedImportName] = useState("");
+  const { formData, updateImportNameValue } = useDocumentUploadContext();
 
   return (
     <Dropdown
       value={
-        selectedImportName === "" ? "Select Import Name:" : selectedImportName
+        formData.importName === "" ? "Select Import Name:" : formData.importName
       }
-      options={IMPORT_NAMES}
+      options={DROPDOWN_OPTIONS}
       onSelectOption={(option) => {
-        setSelectedImportName(option);
+        updateImportNameValue(option);
       }}
     />
   );

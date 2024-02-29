@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 import fileIcon from "../assets/file-icon-1.jpeg";
 import filesIcon from "../assets/file-icon-2.jpeg";
 import Button from "../components/Button.tsx";
+import { useDocumentUploadContext } from "../DocumentUploadProvider.tsx";
 
 function convertBytes(num: number): string {
   const units: string[] = ["bytes", "KB", "MB", "GB"];
@@ -16,15 +17,13 @@ function convertBytes(num: number): string {
 }
 
 export default function DragAndDrop() {
-  const [files, setFiles] = useState<FileList | null>(null);
+  const { formData, updateFiles } = useDocumentUploadContext();
   const inputRef = useRef<HTMLInputElement | null>(null);
 
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
-    setFiles(event.dataTransfer.files);
+    updateFiles(event.dataTransfer.files);
   };
-
-  const filesArray = Array.from(files || []);
 
   return (
     <div className="flex flex-col gap-4">
@@ -46,7 +45,9 @@ export default function DragAndDrop() {
               </div>
               <input
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  setFiles(e.target.files);
+                  const newFiles = e.target.files;
+                  if (!newFiles) return;
+                  updateFiles(newFiles);
                 }}
                 hidden
                 ref={inputRef}
@@ -64,10 +65,10 @@ export default function DragAndDrop() {
         </div>
       </div>
       <div>
-        {files && (
+        {!!formData.files.length && (
           <>
             <div className="bg-gray-200 h-0.5 mt-3 mb-3 w-full" />
-            {filesArray?.map((file) => {
+            {formData.files.map((file) => {
               return (
                 <div
                   className="flex gap-2 items-center px-3 pb-4"

@@ -1,5 +1,12 @@
 import DocumentUpload from "./DocumentUpload";
+import DocumentUploadProvider from "./DocumentUploadProvider.tsx";
 
 export default function App() {
-  return <DocumentUpload />;
+  return (
+    <>
+      <DocumentUploadProvider>
+        <DocumentUpload />
+      </DocumentUploadProvider>
+    </>
+  );
 }
