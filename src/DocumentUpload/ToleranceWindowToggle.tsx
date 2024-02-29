@@ -1,5 +1,5 @@
-import Toggle from "./Toggle.tsx";
-import clockIcon from "./assets/clock-icon.jpeg";
+import Toggle from "../components/Toggle.tsx";
+import clockIcon from "../assets/clock-icon.jpeg";
 
 export default function ToleranceWindowToggle() {
   return (

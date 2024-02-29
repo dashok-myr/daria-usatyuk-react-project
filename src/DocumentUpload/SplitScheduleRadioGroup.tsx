@@ -1,4 +1,4 @@
-import RadioGroup from "./components/RadioGroup.tsx";
+import RadioGroup from "../components/RadioGroup.tsx";
 import { useState } from "react";
 
 const SOCIAL_DISTANCING = [

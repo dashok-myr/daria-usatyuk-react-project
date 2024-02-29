@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Dropdown from "./components/Dropdown.tsx";
+import Dropdown from "../components/Dropdown.tsx";
 
 const IMPORT_NAMES = ["Lorem ipsum dolor", "dolore eu fugiat", "sint occaecat"];
 

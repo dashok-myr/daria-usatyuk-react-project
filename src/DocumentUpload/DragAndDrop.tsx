@@ -1,7 +1,7 @@
 import React, { useRef, useState } from "react";
-import fileIcon from "./assets/file-icon-1.jpeg";
-import filesIcon from "./assets/file-icon-2.jpeg";
-import Button from "./components/Button.tsx";
+import fileIcon from "../assets/file-icon-1.jpeg";
+import filesIcon from "../assets/file-icon-2.jpeg";
+import Button from "../components/Button.tsx";
 
 function convertBytes(num: number): string {
   const units: string[] = ["bytes", "KB", "MB", "GB"];

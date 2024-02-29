@@ -1,6 +1,6 @@
-import RadioGroup from "./components/RadioGroup.tsx";
+import RadioGroup from "../components/RadioGroup.tsx";
 import { useState } from "react";
-import DropdownWithLabel from "./components/DropdownWithLabel.tsx";
+import DropdownWithLabel from "../components/DropdownWithLabel.tsx";
 
 const DROPDOWN_OPTIONS = [
   "Lorem ipsum dolor",
