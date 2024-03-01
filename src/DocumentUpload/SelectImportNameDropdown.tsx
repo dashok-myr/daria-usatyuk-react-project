@@ -4,14 +4,14 @@ import {
   useDocumentUploadContext,
 } from "../DocumentUploadProvider.tsx";
 
+const IMPORT_NAME_PLACEHOLDER = "Select Import Name:";
+
 export default function SelectImportNameDropdown() {
   const { formData, updateImportNameValue } = useDocumentUploadContext();
 
   return (
     <Dropdown
-      value={
-        formData.importName === "" ? "Select Import Name:" : formData.importName
-      }
+      value={formData.importName || IMPORT_NAME_PLACEHOLDER}
       options={DROPDOWN_OPTIONS}
       onSelectOption={(option) => {
         updateImportNameValue(option);
